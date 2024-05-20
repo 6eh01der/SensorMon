@@ -49,7 +49,7 @@ SecurityCircuit sensor[2];
 
 void setup() 
 {
-  D11_In
+  D11_In;
   D12_In;
   D13_Out;
   D16_In;
