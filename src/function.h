@@ -16,6 +16,7 @@ void GetBalanceSim();
 void TestModem();
 void InitialModem();
 void GetNewSMS();
+void InitialSensors();
 void InitialEeprom();
 void SetDingDong();
 void GetIncomingCall();

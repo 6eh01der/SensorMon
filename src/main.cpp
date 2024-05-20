@@ -62,7 +62,7 @@ void setup()
   Serial.begin(9600);                                  // Скорость обмена данными с компьютером
   sim.begin(9600);                                  // Скорость обмена данными с сим модулем                                                          
 
-  InitialZones();
+  InitialSensors();
   InitialEeprom();
   
   balance_send = ((String)temp).toInt();               ////////////////////////////////////////////////////////////////
@@ -213,7 +213,7 @@ void AlarmMessages()
   {
     for(int i = 0; i < counter_triggered; i ++ )
     {
-      if(sensor[triggered[i]].alarm_ == true && sensortriggered[i]].send_alarm_ == false) // Если поднят флаг сработки датчика и уведомление не отправлялось
+      if(sensor[triggered[i]].alarm_ == true && sensor[triggered[i]].send_alarm_ == false) // Если поднят флаг сработки датчика и уведомление не отправлялось
       {
           SendSMS(sensor[triggered[i]].message_alarm_);                                 // Отправляем смс уведомление
           sensor[triggered[i]].send_alarm_ = true;                                      // Поднимаем флаг отправленного уведомления
@@ -558,7 +558,7 @@ if((millis() - timer_balance) > time_balance)
   }
 }
 
-void InitialZones()////////////////////////////// Функция инициализации зон ////////////////////////////////////////////////////
+void InitialSensors()////////////////////////////// Функция инициализации зон ////////////////////////////////////////////////////
   {
 ///////////////////////// 0  Нет тревоги    
 ///////////////////////// 3  Выход реле тревоги                                
