@@ -17,6 +17,7 @@ void TestModem();
 void InitialModem();
 void GetNewSMS();
 void InitialSensors();
+void InitialMacros();
 void InitialEeprom();
 void SetDingDong();
 void GetIncomingCall();

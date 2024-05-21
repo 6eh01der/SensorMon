@@ -260,7 +260,7 @@ void SetLedState(String & result, String & msgphone)
   if (result.length()  ==  1)                     // Если в сообщении одна цифра
   {
     int ledState  =  ((String)result[0]).toInt(); // Получаем первую цифру команды - состояние (0 - выкл, 1 - вкл)
-    if (ledState  >=  0 && ledState  <=  5) 
+    if (ledState  >=  0 && ledState  <=  3) 
     {                                             // Если все нормально, исполняем команду
       if (ledState == 1) 
       {
