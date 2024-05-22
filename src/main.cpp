@@ -46,7 +46,7 @@ bool macros_2[3] = {0,1,0};                               // Активен то
 bool macros_3[3] = {1,1,1};                               // Активны оба датчика
 byte triggered[2] = {9,9};                              // Массив адресов сработавших датчиков                           
 byte counter_triggered = 0;                                     // Счетчик сработок датчиков
-byte counter_admins = 5;                                        // Количество администраторов
+byte counter_admins = 3;                                        // Количество администраторов
 SecurityCircuit sensor[2];                                        
 
 ///////////////////////////////////////// Функция настроек контроллера /////////////////////////////////////////
@@ -288,10 +288,10 @@ void SetLedState(String & result, String & msgphone)
       }
       if(ledState == 0) 
       {
-        mode = false;                            // Снимаем с охраны
+        mode = false;                            // Отключаем наблюдение
         SendSMS(F("mode OFF"));                  // Отправляем смс с результатом администратору
       }     
-      D13_High;                    // Сигнализируем динамиком о смене режима охраны
+      D13_High;                    // Сигнализируем диодом о смене режима наблюдения
       delay(1000);
       D13_Low; 
       correct  =  true;                          // Флаг корректности команды
@@ -335,28 +335,6 @@ void SetLedState(String & result, String & msgphone)
                       D13_Low;
                       SendSMS(F("Number 3 deleted!"));
                       break;
-              case 3:
-                    for(int i = 60; i < 73; i ++ )
-                     {
-                        EEPROM.write(i, (byte)' ');     // Перезаписываем номер админа 4 пробелами
-                     }
-                     phones[k] = " ";                   // Очищаем переменную
-                     D13_High;            // Сигнализируем динамиком о удалении номера дублера
-                     delay(1000);
-                     D13_Low;
-                     SendSMS(F("Number 4 deleted!"));
-                     break;
-              case 4:
-                    for(int i = 80; i < 93; i ++ )
-                    {
-                        EEPROM.write(i, (byte)' ');           // Перезаписываем номер админа 5 пробелами
-                    }
-                    phones[k] = " ";                          // Очищаем переменную
-                    D13_High;                   // Сигнализируем динамиком о удалении номера дублера
-                    delay(1000); 
-                    D13_Low;
-                    SendSMS(F("Number 5 deleted!"));
-                    break;
               default:                                        // Если что-то пошло не так
               SendSMS(F("Number not deleted!"));  
             }
@@ -397,30 +375,6 @@ void SetLedState(String & result, String & msgphone)
                       SendSMS(F("Number 3 accepted!"));
                       flag_number = true;                     // Поднимаем флаг записи номера
                       break;
-              case 3:
-                    for(int i = 60, j = 0; i < 73; i ++ , j ++ )
-                     {
-                        EEPROM.write(i, (byte)result[j]);     // Записываем в память номер админа 4
-                     }
-                     phones[k] = result;                      // Записываем в переменную номер админа 4
-                     D13_High;                  // Сигнализируем динамиком о принятии номера дублера
-                     delay(1000);
-                     D13_Low;
-                     SendSMS(F("Number 4 accepted!"));
-                     flag_number = true;                      // Поднимаем флаг записи номера
-                     break;
-              case 4:
-                    for(int i = 80, j = 0; i < 93; i ++ , j ++ )
-                    {
-                        EEPROM.write(i, (byte)result[j]);     // Записываем в память номер админа 5
-                    }
-                    phones[k] = result;                       // Записываем в переменную номер админа
-                    D13_High;                   // Сигнализируем динамиком о принятии номера дублера
-                    delay(1000);
-                    D13_Low;
-                    SendSMS(F("Number 5 accepted!"));
-                    flag_number = true;                       // Поднимаем флаг записи номера
-                    break;
               default:
               SendSMS(F("Number not accepted!"));  
             }
@@ -585,10 +539,9 @@ if((millis() - timer_balance) > time_balance)
 */
 void InitialSensors()////////////////////////////// Функция инициализации датчиков ////////////////////////////////////////////////////
   {
-///////////////////////// 0  Нет тревоги    
-///////////////////////// 3  Выход реле тревоги                                
-///////////////////////// 1  Выход клапан газа                                  
-///////////////////////// 2  Выход клапан воды                           
+///////////////////////// 0  Нет тревоги                                   
+///////////////////////// 1  Первый датчик                                  
+///////////////////////// 2  Второй датчик                           
 
     for(int i = 0; i < 2; i ++ )
     {
@@ -760,10 +713,10 @@ void InitialEeprom()
    }
    timer_delay_off = ((String)temp).toInt()*1000;               // Инициализируем цифровую переменную задержки выключения
    temp = "";                                                   // Обнуляем строковую переменную задержки выключения
-  for(int i = 104; i < 106; i ++ )
+  /* for(int i = 104; i < 106; i ++ )
   {
       temp += (char)EEPROM.read(i);                             // Получаем из EEPROM баланс
-  }
+  } */
 
   for(int i = 107, j = 0; i < 112; i ++ , j ++ )
   {
