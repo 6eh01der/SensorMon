@@ -11,8 +11,8 @@
 #define SENSOR_1 11         // Первый датчик
 #define SENSOR_2 12         // Второй датчик
 #define BUTTON_PIN 16     // На плате                                    
-#define GSM_RX 3  // Arduino pin 3 to URX
-#define GSM_TX 2  // Arduino pin 2 to UTX
+#define GSM_RX 1  // Arduino pin 3 to URX
+#define GSM_TX 0  // Arduino pin 2 to UTX
 
 SoftwareSerial sim(GSM_RX, GSM_TX);
 
@@ -607,7 +607,7 @@ void TestModem()
       AT_counter = 0;
       if(flag_loop) break;
     }
-    if(_response != "OK")AT_counter ++ ;   
+    if(_response != "OK")AT_counter ++ ;
   } while (_response != "OK");                                    // Не пускать дальше, пока модуль не вернет ОК
 }
 
