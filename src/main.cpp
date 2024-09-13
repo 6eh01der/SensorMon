@@ -100,8 +100,8 @@ void setup()
 void loop() 
 { 
   flag_loop = true;
-  //SetDingDong();                                      // Свето-звуковая индикация входящего звонка 
-  //GetNewSMS();                                        // Получаем входящие смс
+  SetDingDong();                                      // Свето-звуковая индикация входящего звонка 
+  GetNewSMS();                                        // Получаем входящие смс
   
   if (sim.available())   {                         // Если модем, что-то отправил...
     _response  =  WaitResponse();                     // Получаем ответ от модема для анализа
