@@ -100,8 +100,8 @@ void setup()
 void loop() 
 { 
   flag_loop = true;
-  SetDingDong();                                      // Свето-звуковая индикация входящего звонка 
-  GetNewSMS();                                        // Получаем входящие смс
+  //SetDingDong();                                      // Свето-звуковая индикация входящего звонка 
+  //GetNewSMS();                                        // Получаем входящие смс
   
   if (sim.available())   {                         // Если модем, что-то отправил...
     _response  =  WaitResponse();                     // Получаем ответ от модема для анализа
@@ -192,12 +192,6 @@ void GetSensors()
       flag_alarm = true;                                 // Поднимаем флаг сработки
       triggered[counter_triggered] = sensor[i].adress_;    // Записываем адрес датчика в массив сработок
       counter_triggered ++;                             // Увеличиваем счетчик адресов
-    }
-    else
-    {
-      sensor[i].alarm_ = false;
-      sensor[i].send_alarm_ = false;
-      triggered[i] = 9;
     }
   }
 }
