@@ -17,5 +17,5 @@ class SecurityCircuit {                 // Объявляем класс тип�
     {
       return false;
     }
-  } 
+  }
  };  

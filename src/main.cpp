@@ -32,7 +32,6 @@ unsigned long alarm_timer = 0;
 bool flag_loop = false;
 bool flag_call = false;                                         // Флаг входящего звонка  
 bool mode = true;                                              // Режим отслеживания вкл/выкл
-bool flag_alarm = false;                                        // Счетчик звонков о сработках
 bool flag_timer_sms = false;                                    // Флаг обработки входящего смс
 bool hasmsg  =  false;                                          // Флаг наличия сообщений к удалению
 bool flag_alarm_timer = 0;                                          // Переменная хранения макросов
@@ -130,7 +129,6 @@ void loop()
   if(!mode)                                          // Если снято с охраны (режим выкл)
   {   
     flag_alarm_timer = false; 
-    flag_alarm = false;                              // Опускаем флаг сообщений о сработке
     counter_triggered = 0;
     for(int i = 0; i < 2; i ++ )
     {
@@ -189,7 +187,6 @@ void GetSensors()
   { 
     if(sensor[i].ReadPin())                                // Если есть сработка
     {
-      flag_alarm = true;                                 // Поднимаем флаг сработки
       triggered[counter_triggered] = sensor[i].adress_;    // Записываем адрес датчика в массив сработок
       counter_triggered ++;                             // Увеличиваем счетчик адресов
     }
@@ -200,8 +197,6 @@ void GetSensors()
                                                                  
 void AlarmMessages()
 {
-  if(flag_alarm)
-  {
     for(int i = 0; i < counter_triggered; i ++ )
     {
       if(sensor[triggered[i]].alarm_ == true && sensor[triggered[i]].send_alarm_ == false) // Если поднят флаг сработки датчика и уведомление не отправлялось
@@ -215,7 +210,6 @@ void AlarmMessages()
         break;                                                                      // Выходим из цикла
       }
     }
-  }
 }
      
 ///////////////////////////////////////////////// Фунция парсинга СМС /////////////////////////////////////////////////
