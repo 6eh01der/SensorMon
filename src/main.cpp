@@ -502,7 +502,7 @@ void GetNewSMS()
 
 void InitialEeprom()
 {
-  for(int i = 0; i < 13; i ++ )
+  for(int i = 0; i < 12; i ++ )
    {
       phones[0] += (char)EEPROM.read(i);                        // Получаем из EEPROM номер админа
    }
@@ -605,7 +605,7 @@ void GetIncomingCall()
       {
         phones[0] = inner_phone;
 
-        for(int i = 0; i < 13; i ++ )
+        for(int i = 0; i < 12; i ++ )
         {
           EEPROM.write(i, (byte)phones[0][i]);     // Записываем номер в память EEPROM
         }      
