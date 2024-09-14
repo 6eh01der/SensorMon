@@ -273,7 +273,7 @@ void SetLedState(String & result, String & msgphone)
   }
   else
     {
-      if(result.length()  ==  13 && msgphone == phones[0])  // Если в сообщении номер телефона и отправитель админ 1
+      if(result.length()  ==  12 && msgphone == phones[0])  // Если в сообщении номер телефона и отправитель админ 1
       {
         bool flag_number = false;
         for(int k = 1; k < counter_admins; k ++ )       // Проходим по списку номеров
