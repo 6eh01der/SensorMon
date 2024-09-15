@@ -1,5 +1,3 @@
-/////////////////////////// Охранно-аварийная gsm-сигнализация с sms-управляемыми реле ////////////////////////////////
-
 #include  <SoftwareSerial.h>                                
 #include  <EEPROM.h> 
 #include  <CyberLib.h> 
